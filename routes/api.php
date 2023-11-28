@@ -52,6 +52,7 @@ Route::group(['prefix' => 'employee', 'middleware' => 'auth:api'], function ($ro
     Route::get('/{id}', [EmployeeController::class, 'show']); // manager/admin/owner can access
     Route::post('/', [EmployeeController::class, 'register'])->middleware('manager:' . Division::HRD);
     Route::put('/', [EmployeeController::class, 'update'])->middleware('manager:' . Division::HRD);
+    Route::delete('/{id}', [EmployeeController::class, 'destroy'])->middleware('manager:' . Division::HRD);
 
     Route::group(['prefix' => 'status', 'middleware' => 'auth:api'], function ($router) {
         Route::get('/', [EmployeeStatusController::class, 'index']);

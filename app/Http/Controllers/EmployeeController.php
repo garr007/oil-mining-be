@@ -7,6 +7,7 @@ use App\Http\Requests\ShowEmployeeRequest;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Division;
+use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -190,5 +191,15 @@ class EmployeeController extends Controller
         }
 
         return $this->response(new UserResource($user), "employee data updated", Response::HTTP_OK);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $status = Employee::findOrFail($id)->delete();
+        if (!$status) {
+            return $this->errResponse($request, 'failed to delee employee, db failure');
+        }
+
+        return $this->response(null, 'delete success', Response::HTTP_OK);
     }
 }
