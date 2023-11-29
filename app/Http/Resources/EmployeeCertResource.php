@@ -24,6 +24,7 @@ class EmployeeCertResource extends JsonResource
             'exp_date' => $this->exp_date,
             'type' => $this->type,
             'cert' => EmployeeCert::getDownloadLink($this->cert),
+            'employee' => new EmployeeResource($this->whenLoaded('employee')),
         ];
     }
 }

@@ -48,7 +48,7 @@ class DivisionController extends Controller
 
         $divisions->data = DivisionResource::collection($divisions->items());
 
-        if (!$divisions->data->isEmpty()) {
+        if ($divisions->data->isEmpty()) {
             return $this->response($divisions, "not found", Response::HTTP_NOT_FOUND);
         }
 

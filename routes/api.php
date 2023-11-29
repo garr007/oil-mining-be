@@ -61,6 +61,7 @@ Route::group(['prefix' => 'employee', 'middleware' => 'auth:api'], function ($ro
     });
 
     Route::group(['prefix' => 'certificate', 'middleware' => 'auth:api'], function ($router) {
+        Route::get('/all', [EmployeeCertController::class, 'index']);
         Route::get('/{id}', [EmployeeCertController::class, 'show']); // manager/admin/owner can access
         Route::get('/user/{id}', [EmployeeCertController::class, 'showByUser']); // manager/admin/owner can access
         Route::post('/', [EmployeeCertController::class, 'store'])->middleware('manager:' . Division::HRD);

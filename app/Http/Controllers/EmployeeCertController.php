@@ -22,6 +22,31 @@ class EmployeeCertController extends Controller
 {
 
     /**
+     * Display all resource with pagination 
+     */
+    public function index(Request $request)
+    {
+        // //'page' handled by laravel
+        $perPage = $request->input('per_page', 20); //get
+        $perPage = $perPage > 20 ? 20 : $perPage; //set max
+
+        $withEmployee = $request->input('with_employee', 'false');
+
+        Log::debug('searching for employee certificates with pagination');
+        $certs = strcasecmp($withEmployee, 'true') == 0 ?
+            EmployeeCert::with('employee.user')->has('employee')->paginate($perPage) :
+            EmployeeCert::paginate($perPage);
+
+        $certs->data = EmployeeCertResource::collection($certs);
+
+        if ($certs->data->isEmpty()) {
+            return $this->response($certs, "not found", Response::HTTP_NOT_FOUND);
+        }
+
+        return $this->response($certs, "found", Response::HTTP_OK);
+    }
+
+    /**
      * Display a resource by id.
      */
     public function show(ShowEmployeeCertRequest $request, $id)
