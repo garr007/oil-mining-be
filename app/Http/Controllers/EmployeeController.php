@@ -21,7 +21,7 @@ class EmployeeController extends Controller
      * Create a new AuthController instance.
      *
      * @return void
-    //  */
+     */
     public function __construct()
     {
         // $this->middleware('auth:api');
@@ -67,7 +67,7 @@ class EmployeeController extends Controller
      * get employee by id
      *
      * @return \Illuminate\Http\JsonResponse
-    //  */
+    */
     public function show(ShowEmployeeRequest $request, $id)
     {
         $user = User::with('employee.position.division', 'employee.status')->has('employee')->findOrFail($id);

@@ -1,16 +1,23 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DivisionController;
-use App\Http\Controllers\EmployeeCertController;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\EmployeeStatusController;
-use App\Http\Controllers\PositionController;
-use App\Http\Controllers\ResearchCategoryController;
-use App\Http\Controllers\ResearchController;
-use App\Http\Controllers\UserController;
 use App\Models\Division;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\OilTaskController;
+use App\Http\Controllers\DivisionController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PositionController;
+use App\Http\Controllers\ResearchController;
+use App\Http\Controllers\OilAssetsController;
+use App\Http\Controllers\OilStocksController;
+use App\Http\Controllers\OilTransferController;
+use App\Http\Controllers\EmployeeCertController;
+use App\Http\Controllers\EmployeeFormController;
+use App\Http\Controllers\EmployeeStatusController;
+use App\Http\Controllers\PersonalDataController;
+use App\Http\Controllers\ResearchCategoryController;
+use App\Models\PersonalData;
 
 // use PHPUnit\Event\Test\AfterTestMethodFinished;
 
@@ -101,5 +108,43 @@ Route::group(['prefix' => 'research', 'middleware' => 'auth:api'], function ($ro
         Route::put('/', [ResearchCategoryController::class, 'update']);
         Route::delete('/{id}', [ResearchCategoryController::class, 'destroy'])->middleware('manager:' . Division::RND);
     });
+});
 
+
+Route::group(['prefix' => 'assets'], function ($router) {
+    Route::get('/', [OilAssetsController::class, 'index']);
+    Route::post('/', [OilAssetsController::class, 'store']);
+    Route::put('/{id}', [OilAssetsController::class, 'update']);
+    Route::delete('/{id}', [OilAssetsController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'stocks'], function ($router) {
+    Route::get('/', [OilStocksController::class, 'index']);
+    Route::post('/', [OilStocksController::class, 'store']);
+    Route::put('/{id}', [OilStocksController::class, 'update']);
+    Route::delete('/{id}', [OilStocksController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'transfer'], function ($router) {
+    Route::get('/', [OilTransferController::class, 'index']);
+    Route::post('/', [OilTransferController::class, 'store']);
+    Route::put('/{id}', [OilTransferController::class, 'update']);
+    Route::delete('/{id}', [OilTransferController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'task'], function ($router) {
+    Route::get('/', [OilTaskController::class, 'index']);
+    Route::post('/', [OilTaskController::class, 'store']);
+    Route::put('/{id}', [OilTaskController::class, 'update']);
+    Route::delete('/{id}', [OilTaskController::class, 'destroy']);
+});
+
+Route::group(['prefix' => 'personal'], function ($router) {
+    Route::get('/', [PersonalDataController::class, 'index']);
+    Route::post('/', [PersonalDataController::class, 'store']);
+});
+
+Route::group(['prefix' => 'employeeForm'], function ($router) {
+    Route::get('/{id}', [EmployeeFormController::class, 'index']);
+    Route::post('/', [EmployeeFormController::class, 'store']);
 });
