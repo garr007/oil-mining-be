@@ -12,6 +12,6 @@ class OilAssets extends Model
     protected $table = 'oil_assets';
 
     protected $fillable = [
-        'Nama_Aset', 'Jenis_Aset', 'Status_Aset', 'Riwayat_Status', 'id'
+        'Nama_Aset', 'Jenis_Aset', 'Status_Aset', 'Riwayat_Status','Keterangan','id'
     ];
 }

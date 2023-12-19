@@ -113,38 +113,38 @@ Route::group(['prefix' => 'research', 'middleware' => 'auth:api'], function ($ro
 
 Route::group(['prefix' => 'assets'], function ($router) {
     Route::get('/', [OilAssetsController::class, 'index']);
-    Route::post('/', [OilAssetsController::class, 'store']);
-    Route::put('/{id}', [OilAssetsController::class, 'update']);
-    Route::delete('/{id}', [OilAssetsController::class, 'destroy']);
+    Route::post('/', [OilAssetsController::class, 'store'])->middleware('admin:' . Division::MINING);
+    Route::put('/{id}', [OilAssetsController::class, 'update'])->middleware('admin:' . Division::MINING);
+    Route::delete('/{id}', [OilAssetsController::class, 'destroy'])->middleware('admin:' . Division::MINING);
 });
 
 Route::group(['prefix' => 'stocks'], function ($router) {
     Route::get('/', [OilStocksController::class, 'index']);
-    Route::post('/', [OilStocksController::class, 'store']);
-    Route::put('/{id}', [OilStocksController::class, 'update']);
-    Route::delete('/{id}', [OilStocksController::class, 'destroy']);
+    Route::post('/', [OilStocksController::class, 'store'])->middleware('admin:' . Division::MINING);
+    Route::put('/{id}', [OilStocksController::class, 'update'])->middleware('admin:' . Division::MINING);
+    Route::delete('/{id}', [OilStocksController::class, 'destroy'])->middleware('admin:' . Division::MINING);
 });
 
 Route::group(['prefix' => 'transfer'], function ($router) {
     Route::get('/', [OilTransferController::class, 'index']);
-    Route::post('/', [OilTransferController::class, 'store']);
-    Route::put('/{id}', [OilTransferController::class, 'update']);
-    Route::delete('/{id}', [OilTransferController::class, 'destroy']);
+    Route::post('/', [OilTransferController::class, 'store'])->middleware('admin:' . Division::MINING);
+    Route::put('/{id}', [OilTransferController::class, 'update'])->middleware('admin:' . Division::MINING);
+    Route::delete('/{id}', [OilTransferController::class, 'destroy'])->middleware('admin:' . Division::MINING);
 });
 
 Route::group(['prefix' => 'task'], function ($router) {
     Route::get('/', [OilTaskController::class, 'index']);
-    Route::post('/', [OilTaskController::class, 'store']);
-    Route::put('/{id}', [OilTaskController::class, 'update']);
-    Route::delete('/{id}', [OilTaskController::class, 'destroy']);
+    Route::post('/', [OilTaskController::class, 'store'])->middleware('admin:' . Division::MINING);
+    Route::put('/{id}', [OilTaskController::class, 'update'])->middleware('admin:' . Division::MINING);
+    Route::delete('/{id}', [OilTaskController::class, 'destroy'])->middleware('admin:' . Division::MINING);
 });
 
 Route::group(['prefix' => 'personal'], function ($router) {
     Route::get('/', [PersonalDataController::class, 'index']);
-    Route::post('/', [PersonalDataController::class, 'store']);
+    Route::post('/', [PersonalDataController::class, 'store'])->middleware('admin:' . Division::MINING);
 });
 
 Route::group(['prefix' => 'employeeForm'], function ($router) {
     Route::get('/{id}', [EmployeeFormController::class, 'index']);
-    Route::post('/', [EmployeeFormController::class, 'store']);
+    Route::post('/', [EmployeeFormController::class, 'store'])->middleware('admin:' . Division::MINING);
 });

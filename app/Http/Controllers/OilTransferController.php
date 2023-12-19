@@ -30,10 +30,6 @@ class OilTransferController extends Controller
             'Nama_Aset' => 'required'
         ]);
 
-        $oilAsset = OilAssets::firstOrCreate(
-            ['Nama_Aset' => $request->input('Nama_Aset')],
-        );
-        $request->merge(['oil_assets_id' => $oilAsset->id]);
         $post = OilTransfer::create($request->all());
 
         return $this->response(

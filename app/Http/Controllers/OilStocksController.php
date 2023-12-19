@@ -27,13 +27,8 @@ class OilStocksController extends Controller
             'Tanggal_Masuk' => 'required',
             'Tanggal_Keluar' => 'required',
             'Lokasi_Penyimpanan' => 'required',
-            'Nama_Aset' => 'required'
         ]);
 
-        $oilAsset = OilAssets::firstOrCreate(
-            ['Nama_Aset' => $request->input('Nama_Aset')],
-        );
-        $request->merge(['oil_assets_id' => $oilAsset->id]);
         $post = OilStocks::create($request->all());
 
         return $this->response(

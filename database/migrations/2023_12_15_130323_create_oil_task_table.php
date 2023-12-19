@@ -17,6 +17,9 @@ return new class extends Migration
             $table->text('Isi');
             $table->timestamps();
             $table->softDeletes();
+            $table->unsignedBigInteger('employee_id');
+
+            $table->foreign('employee_id')->references('id')->on('employee_statuses');
         });
     }
 
